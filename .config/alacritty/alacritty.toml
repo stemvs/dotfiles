@@ -1,0 +1,9 @@
+[general]
+import = ["~/.config/alacritty/themes/noctalia.toml"]
+
+[terminal.shell]
+program = "/usr/bin/fish"
+args = ["--login"]
+
+[window]
+opacity = 0.8
