@@ -84,7 +84,7 @@
         "widgets": {
             "center": [
                 {
-                    "characterCount": 2,
+                    "characterCount": 4,
                     "colorizeIcons": false,
                     "emptyColor": "secondary",
                     "enableScrollWheel": true,
@@ -198,6 +198,12 @@
                     "id": "NotificationHistory",
                     "showUnreadBadge": true,
                     "unreadBadgeColor": "primary"
+                },
+                {
+                    "displayMode": "onhover",
+                    "iconColor": "none",
+                    "id": "Bluetooth",
+                    "textColor": "none"
                 },
                 {
                     "deviceNativePath": "__default__",
