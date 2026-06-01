@@ -264,10 +264,10 @@
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "DP-5",
-        "predefinedScheme": "Rose Pine",
+        "predefinedScheme": "Tokyo Night Moon",
         "schedulingMode": "off",
         "syncGsettings": true,
-        "useWallpaperColors": true
+        "useWallpaperColors": false
     },
     "controlCenter": {
         "cards": [
