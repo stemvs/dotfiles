@@ -11,6 +11,7 @@ prefer-no-csd
 
 debug {
     disable-cursor-plane
+    honor-xdg-activation-with-invalid-serial
 }
 
 
@@ -85,6 +86,7 @@ input {
 // Remember to uncomment the node by removing "/-"!
 output "DP-1" {
 	transform "270"
+	mode "2560x1440@165.000"
 }
 /-output "eDP-1" {
     // Uncomment this line to disable this output.
@@ -122,7 +124,7 @@ output "DP-1" {
 // https://niri-wm.github.io/niri/Configuration:-Layout
 layout {
     // Set gaps around windows in logical pixels.
-    gaps 9
+    gaps 4
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -170,7 +172,7 @@ layout {
         // off
 
         // How many logical pixels the ring extends out from the windows.
-        width 4
+        width 1
 
         // Colors can be set in a variety of ways:
         // - CSS named colors: "red"
@@ -286,7 +288,7 @@ layout {
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
-    // skip-at-startup
+    skip-at-startup
 }
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
@@ -352,8 +354,8 @@ window-rule {
 
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
-/-window-rule {
-    geometry-corner-radius 12
+window-rule {
+    geometry-corner-radius 10
     clip-to-geometry true
 }
 
