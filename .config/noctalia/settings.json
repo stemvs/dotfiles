@@ -500,12 +500,12 @@
     },
     "nightLight": {
         "autoSchedule": true,
-        "dayTemp": "3424",
+        "dayTemp": "3996",
         "enabled": true,
         "forced": false,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
-        "nightTemp": "1000"
+        "nightTemp": "3496"
     },
     "noctaliaPerformance": {
         "disableDesktopWidgets": true,

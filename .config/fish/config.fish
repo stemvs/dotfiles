@@ -3,5 +3,5 @@ if status is-interactive
 set fish_greeting
 
 abbr config '/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-abbr csync '/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME add -u && /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME commit -m "sync" && /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME push'
+#abbr csync '/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME add -u && /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME commit -m "sync" && /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME push'
 end
