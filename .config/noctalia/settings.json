@@ -270,7 +270,7 @@
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "DP-5",
-        "predefinedScheme": "Tokyo Night Moon",
+        "predefinedScheme": "Rose Pine",
         "schedulingMode": "off",
         "syncGsettings": true,
         "useWallpaperColors": false
@@ -657,6 +657,22 @@
             {
                 "enabled": true,
                 "id": "alacritty"
+            },
+            {
+                "enabled": true,
+                "id": "gtk"
+            },
+            {
+                "enabled": true,
+                "id": "niri"
+            },
+            {
+                "enabled": true,
+                "id": "qt"
+            },
+            {
+                "enabled": true,
+                "id": "code"
             }
         ],
         "enableUserTheming": false
