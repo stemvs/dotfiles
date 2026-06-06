@@ -368,7 +368,8 @@ window-rule {
     clip-to-geometry true
 }
 
-spawn-at-startup "qs" "-c" "noctalia-shell"
+spawn-at-startup "noctalia"
 
-include "./noctalia.kdl"
+//include "./noctalia.kdl"
 include "./keybinds.kdl"
+include "noctalia.kdl"
