@@ -45,8 +45,8 @@ widget_order = [ "lockscreen-login-box@DP-1", "lockscreen-login-box@DP-5" ]
     type = "login_box"
 
 [shell]
+corner_radius_scale = 1.3500000201165676
 font_family = "Inter"
-settings_show_advanced = true
 telemetry_enabled = false
 ui_scale = 1.2500000111758709
 
