@@ -21,6 +21,8 @@ cursor {
 
 input {
     keyboard {
+        repeat-delay 200
+        repeat-rate 35
         xkb {
             // You can set rules, model, layout, variant and options.
             // For more information, see xkeyboard-config(7).
@@ -95,6 +97,7 @@ output "DP-1" {
 
 output "DP-5" {
 	focus-at-startup
+    background-color "#000000"
 }
 
 /-output "eDP-1" {
