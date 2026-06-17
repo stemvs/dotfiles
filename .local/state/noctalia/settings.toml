@@ -1,7 +1,18 @@
 [bar.default]
 background_opacity = 0.099999997764825821
 center = [ "date", "spacer_2", "clock" ]
-end = [ "media", "tray", "notifications", "clipboard", "network", "bluetooth", "volume", "battery", "session" ]
+end = [
+    "media",
+    "tray",
+    "notifications",
+    "clipboard",
+    "network",
+    "bluetooth",
+    "volume",
+    "battery",
+    "headphone_batt",
+    "session"
+]
 margin_edge = 8
 scale = 1.350000012665987
 start = [ "launcher", "wallpaper", "workspaces", "cpu_usage", "cpu_temp", "memory" ]
@@ -47,6 +58,7 @@ widget_order = [ "lockscreen-login-box@DP-1", "lockscreen-login-box@DP-5" ]
 [shell]
 corner_radius_scale = 1.3500000201165676
 font_family = "Inter"
+polkit_agent = true
 telemetry_enabled = false
 ui_scale = 1.2500000111758709
 
@@ -85,9 +97,16 @@ transition_on_startup = true
     path = "/home/browser/Pictures/Wallpapers/wallhaven_gpr73d.jpg"
     theme_mode = "auto"
 
+[widget.batt_headphones]
+device = "/org/freedesktop/UPower/devices/headset_dev_AC_80_0A_AE_7D_10"
+display_mode = "graphic"
+type = "battery"
+
 [widget.battery]
 device = "/org/freedesktop/UPower/devices/battery_hidpp_battery_0"
 display_mode = "graphic"
+hide_when_full = true
+hide_when_plugged = true
 
 [widget.clock]
 anchor = true
@@ -112,12 +131,20 @@ type = "sysmon"
 stat = "gpu_usage"
 type = "sysmon"
 
+[widget.headphone_batt]
+device = "/org/freedesktop/UPower/devices/headset_dev_AC_80_0A_AE_7D_10"
+display_mode = "graphic"
+type = "battery"
+
 [widget.media]
 hide_when_no_media = true
 
 [widget.memory]
 stat = "ram_used"
 type = "sysmon"
+
+[widget.network]
+show_label = false
 
 [widget.spacer_2]
 type = "spacer"
