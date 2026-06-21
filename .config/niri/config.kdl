@@ -1,11 +1,3 @@
-// This config is in the KDL format: https://kdl.dev
-// "/-" comments out the following node.
-// Check the wiki for a full description of the configuration:
-// https://niri-wm.github.io/niri/Configuration:-Introduction
-
-// Input device configuration.
-// Find the full list of options on the wiki:
-// https://niri-wm.github.io/niri/Configuration:-Input
 
 prefer-no-csd
 
@@ -16,7 +8,7 @@ debug {
 
 cursor {
     xcursor-theme "Bibata-Modern-Classic"
-    xcursor-size 24
+    xcursor-size 28
 }
 
 input {
@@ -91,11 +83,13 @@ input {
 // https://niri-wm.github.io/niri/Configuration:-Outputs
 // Remember to uncomment the node by removing "/-"!
 output "DP-1" {
+    position x=-1440 y=-650
 	transform "270"
 	mode "2560x1440@165.000"
 }
 
 output "DP-5" {
+    position x=0 y=0
 	focus-at-startup
     background-color "#000000"
 }
@@ -373,6 +367,5 @@ window-rule {
 
 spawn-at-startup "noctalia"
 
-//include "./noctalia.kdl"
-include "./keybinds.kdl"
+include "keybinds.kdl"
 include "noctalia.kdl"

@@ -74,7 +74,7 @@ ui_scale = 1.2500000111758709
 
 [theme]
 builtin = "Tokyo-Night"
-community_palette = "vibrant"
+community_palette = "Vesper"
 custom_palette = "Vesper"
 source = "community"
 wallpaper_scheme = "vibrant"
@@ -99,7 +99,7 @@ transition_on_startup = true
     path = "/home/browser/Pictures/Wallpapers/wallhaven-57d3e7_2560x1440.png"
 
     [[wallpaper.favorite]]
-    community_palette = "Vesper"
+    community_palette = "Tokyo Night Moon"
     palette_source = "community"
     path = "/home/browser/Pictures/Wallpapers/wallhaven_gpr73d.jpg"
     theme_mode = "dark"
