@@ -1,0 +1,16 @@
+[general]
+import = ["~/.config/alacritty/themes/noctalia.toml"]
+
+[terminal.shell]
+program = "/usr/bin/fish"
+args = ["--login"]
+
+[font]
+size = 15.0
+
+[window]
+opacity = 0.8
+
+[window.padding]
+x = 5
+y = 5
