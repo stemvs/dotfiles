@@ -73,33 +73,35 @@ ui_scale = 1.2500000111758709
     direction = "down_right"
 
 [theme]
-builtin = "Rosé Pine"
-community_palette = "Vesper"
-source = "community"
-wallpaper_scheme = "faithful"
+builtin = "Tokyo-Night"
+community_palette = "m3-content"
+custom_palette = "ADW"
+source = "wallpaper"
+wallpaper_scheme = "ADW"
 
     [theme.templates]
     builtin_ids = [ "alacritty", "gtk3", "gtk4", "kcolorscheme", "niri", "qt" ]
 
 [wallpaper]
-directory = "/home/browser/Pictures/Wallpapers"
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/browser/Pictures/Wallpapers/wallhaven-57d3e7_2560x1440.png"
+    path = "/home/browser/Pictures/Wallpapers/wallhaven_gpr73d.jpg"
 
     [wallpaper.last]
-    path = "/home/browser/Pictures/Wallpapers/wallhaven-57d3e7_2560x1440.png"
+    path = "/home/browser/Pictures/Wallpapers/wallhaven_gpr73d.jpg"
 
     [wallpaper.monitors.DP-1]
-    path = "/home/browser/Pictures/Wallpapers/wallhaven-57d3e7_2560x1440.png"
+    path = "/home/browser/Pictures/Wallpapers/wallhaven_gpr73d.jpg"
 
     [wallpaper.monitors.DP-5]
-    path = "/home/browser/Pictures/Wallpapers/wallhaven-57d3e7_2560x1440.png"
+    path = "/home/browser/Pictures/Wallpapers/wallhaven_gpr73d.jpg"
 
     [[wallpaper.favorite]]
+    palette_source = "wallpaper"
     path = "/home/browser/Pictures/Wallpapers/wallhaven_gpr73d.jpg"
-    theme_mode = "auto"
+    theme_mode = "dark"
+    wallpaper_scheme = "Tokyo-Night"
 
 [widget.batt_headphones]
 device = "/org/freedesktop/UPower/devices/headset_dev_AC_80_0A_AE_7D_10"
