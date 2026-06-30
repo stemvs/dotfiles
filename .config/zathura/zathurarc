@@ -1,0 +1,5 @@
+include noctaliarc
+
+set recolor true
+set recolor-keephue true
+map i recolor
