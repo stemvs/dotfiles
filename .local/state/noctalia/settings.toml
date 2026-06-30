@@ -27,12 +27,6 @@ warning_threshold = 30
 [brightness]
 enable_ddcutil = true
 
-[dock]
-auto_hide = true
-enabled = true
-magnification = false
-show_dots = true
-
 [lockscreen_widgets]
 enabled = false
 schema_version = 1
@@ -73,14 +67,16 @@ ui_scale = 1.2500000111758709
     direction = "down_right"
 
 [theme]
-builtin = "Tokyo-Night"
-community_palette = "Vesper"
-custom_palette = "Vesper"
+builtin = "Ayu"
+community_palette = "Oasis Abyss"
+custom_palette = "Ayu"
+mode = "dark"
 source = "community"
-wallpaper_scheme = "vibrant"
+wallpaper_scheme = "dysfunctional"
 
     [theme.templates]
     builtin_ids = [ "alacritty", "gtk3", "gtk4", "kcolorscheme", "niri", "qt" ]
+    community_ids = [ "zathura" ]
 
 [wallpaper]
 directory = "/home/browser/Pictures/Wallpapers"
@@ -99,9 +95,9 @@ transition_on_startup = true
     path = "/home/browser/Pictures/Wallpapers/wallhaven-57d3e7_2560x1440.png"
 
     [[wallpaper.favorite]]
-    community_palette = "Tokyo Night Moon"
+    community_palette = "Oasis Abyss"
     palette_source = "community"
-    path = "/home/browser/Pictures/Wallpapers/wallhaven_gpr73d.jpg"
+    path = "/home/browser/Pictures/Wallpapers/wallhaven-57d3e7_2560x1440.png"
     theme_mode = "dark"
 
 [widget.batt_headphones]

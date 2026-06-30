@@ -1,68 +1,68 @@
 [colors.primary]
-background = '#0c0c0c'
-foreground = '#ffffff'
+background = '#000000'
+foreground = '#f0ebe6'
 
 [colors.cursor]
 text = '#000000'
-cursor = '#ffffff'
+cursor = '#f58888'
 
 [colors.vi_mode_cursor]
-text = '#0c0c0c'
-cursor = '#ffc799'
+text = '#1a1a1a'
+cursor = '#d06666'
 
 [colors.search.matches]
-foreground = '#1c1c1c'
-background = '#fbadff'
+foreground = '#080808'
+background = '#f0e68c'
 
 [colors.search.focused_match]
-foreground = '#1c1c1c'
-background = '#ffc799'
+foreground = '#080808'
+background = '#d06666'
 
 [colors.footer_bar]
-foreground = '#1c1c1c'
+foreground = '#080808'
 background = '#e8e3e3'
 
 [colors.hints.start]
-foreground = '#1c1c1c'
-background = '#99ffe4'
+foreground = '#080808'
+background = '#ffa247'
 
 [colors.hints.end]
-foreground = '#1c1c1c'
-background = '#99ffe4'
+foreground = '#080808'
+background = '#ffa247'
 
 [colors.selection]
-text = '#000000'
-background = '#ffc799'
+text = '#f0ebe6'
+background = '#5a3824'
 
 
 [colors.normal]
-black   = '#0c0c0c'
-red     = '#ff8080'
-green   = '#99ffe4'
-yellow  = '#ffc799'
-blue    = '#80b3ff'
-magenta = '#fbadff'
-cyan    = '#99ffe4'
-white   = '#a0a0a0'
+black   = '#000000'
+red     = '#d06666'
+green   = '#53d390'
+yellow  = '#f0e68c'
+blue    = '#519bff'
+magenta = '#c28eff'
+cyan    = '#5abaae'
+white   = '#dddbd5'
 
 
 [colors.bright]
-black   = '#505050'
-red     = '#ff8080'
-green   = '#99ffe4'
-yellow  = '#ffc799'
-blue    = '#80b3ff'
-magenta = '#fbadff'
-cyan    = '#99ffe4'
-white   = '#ffffff'
+black   = '#666666'
+red     = '#ffa0a0'
+green   = '#96ea7f'
+yellow  = '#ffa247'
+blue    = '#87ceeb'
+magenta = '#d2adff'
+cyan    = '#8fd1c7'
+white   = '#fff9f2'
 
 
 [colors.dim]
-black   = '#0c0c0c'
-red     = '#ff8080'
-green   = '#99ffe4'
-yellow  = '#ffc799'
-blue    = '#80b3ff'
-magenta = '#fbadff'
-cyan    = '#99ffe4'
-white   = '#a0a0a0'
+black   = '#000000'
+red     = '#d06666'
+green   = '#53d390'
+yellow  = '#f0e68c'
+blue    = '#519bff'
+magenta = '#c28eff'
+cyan    = '#5abaae'
+white   = '#dddbd5'
