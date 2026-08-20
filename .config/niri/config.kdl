@@ -1,5 +1,8 @@
-
 prefer-no-csd
+
+environment {
+    _JAVA_AWT_WM_NONREPARENTING "1"
+}
 
 debug {
     disable-cursor-plane
@@ -7,13 +10,19 @@ debug {
 }
 
 cursor {
-    xcursor-theme "Bibata-Modern-Classic"
-    xcursor-size 28
+    xcursor-theme "capitaine-cursors"
+    xcursor-size 42
+}
+
+gestures {
+    hot-corners {
+        off
+    }
 }
 
 input {
     keyboard {
-        repeat-delay 200
+        repeat-delay 250
         repeat-rate 35
         xkb {
             // You can set rules, model, layout, variant and options.
@@ -85,7 +94,7 @@ input {
 output "DP-1" {
     position x=-1440 y=-650
 	transform "270"
-	// mode "2560x1440@165.000"
+	mode "2560x1440@165.000"
 }
 
 output "DP-5" {
@@ -214,10 +223,10 @@ layout {
     border {
         // The settings are the same as for the focus ring.
         // If you enable the border, you probably want to disable the focus ring.
-        off
+        // off
 
-        width 4
-        active-color "#ffc87f"
+        width 1
+        // active-color "#ffc87f"
         inactive-color "#505050"
 
         // Color of the border around windows that request your attention.
