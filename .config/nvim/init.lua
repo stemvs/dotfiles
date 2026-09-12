@@ -629,7 +629,6 @@ do
 		end,
 	})
 
-	
 	-- Enable the following language servers
 	--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 	--  See `:help lsp-config` for information about keys and how to configure
@@ -637,7 +636,23 @@ do
 	local servers = {
 		clangd = {},
 		gopls = {},
-		luau_lsp = {},
+		luau_lsp = {
+			cmd = {
+				"luau-lsp",
+				"lsp",
+				"--definitions:@noctalia=" .. vim.fn.expand("~/noctalia/plugins/noctalia.d.luau"),
+			},
+			init_options = {
+				["luau-lsp"] = {
+					require = {
+						mode = "relativeToFile",
+						directoryAliases = {
+							["@lune/"] = vim.fn.expand("~/.lune/.typedefs/x.y.z/"),
+						},
+					},
+				},
+			},
+		},
 		-- pyright = {},
 		-- rust_analyzer = {},
 		--
@@ -730,7 +745,8 @@ do
 		format_on_save = function(bufnr)
 			-- You can specify filetypes to autoformat on save here:
 			local enabled_filetypes = {
-				-- lua = true,
+				lua = true,
+				luau = true,
 				-- python = true,
 			}
 			if enabled_filetypes[vim.bo[bufnr].filetype] then
@@ -744,6 +760,8 @@ do
 		},
 		-- You can also specify external formatters in here.
 		formatters_by_ft = {
+			lua = { "stylua" },
+			luau = { "stylua" },
 			-- rust = { 'rustfmt' },
 			-- Conform can also run multiple formatters sequentially
 			-- python = { "isort", "black" },
