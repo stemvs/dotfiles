@@ -1,6 +1,92 @@
+--[[
+
+=====================================================================
+==================== READ THIS BEFORE CONTINUING ====================
+=====================================================================
+========                                    .-----.          ========
+========         .----------------------.   | === |          ========
+========         |.-""""""""""""""""""-.|   |-----|          ========
+========         ||                    ||   | === |          ========
+========         ||   KICKSTART.NVIM   ||   |-----|          ========
+========         ||                    ||   | === |          ========
+========         ||                    ||   |-----|          ========
+========         ||:Tutor              ||   |:::::|          ========
+========         |'-..................-'|   |____o|          ========
+========         `"")----------------(""`   ___________      ========
+========        /::::::::::|  |::::::::::\  \ no mouse \     ========
+========       /:::========|  |==hjkl==:::\  \ required \    ========
+========      '""""""""""""'  '""""""""""""'  '""""""""""'   ========
+========                                                     ========
+=====================================================================
+=====================================================================
+
+What is Kickstart?
+
+  Kickstart.nvim is *not* a distribution.
+
+  Kickstart.nvim is a starting point for your own configuration.
+    The goal is that you can read every line of code, top-to-bottom, understand
+    what your configuration is doing, and modify it to suit your needs.
+
+    Once you've done that, you can start exploring, configuring and tinkering to
+    make Neovim your own! That might mean leaving Kickstart just the way it is for a while
+    or immediately breaking it into modular pieces. It's up to you!
+
+    If you don't know anything about Lua, I recommend taking some time to read through
+    a guide. One possible example which will only take 10-15 minutes:
+      - https://learnxinyminutes.com/docs/lua/
+
+    After understanding a bit more about Lua, you can use `:help lua-guide` as a
+    reference for how Neovim integrates Lua.
+    - :help lua-guide
+    - (or HTML version): https://neovim.io/doc/user/lua-guide.html
+
+Kickstart Guide:
+
+  TODO: The very first thing you should do is to run the command `:Tutor` in Neovim.
+
+    If you don't know what this means, type the following:
+      - <escape key>
+      - :
+      - Tutor
+      - <enter key>
+
+    (If you already know the Neovim basics, you can skip this step.)
+
+  Once you've completed that, you can continue working through **AND READING** the rest
+  of the kickstart init.lua.
+
+  Next, run AND READ `:help`.
+    This will open up a help window with some basic information
+    about reading, navigating and searching the builtin help documentation.
+
+    This should be the first place you go to look when you're stuck or confused
+    with something. It's one of my favorite Neovim features.
+
+    MOST IMPORTANTLY, we provide a keymap "<space>sh" to [s]earch the [h]elp documentation,
+    which is very useful when you're not exactly sure of what you're looking for.
+
+  I have left several `:help X` comments throughout the init.lua
+    These are hints about where to find more information about the relevant settings,
+    plugins or Neovim features used in Kickstart.
+
+   NOTE: Look for lines like this
+
+    Throughout the file. These are for you, the reader, to help you understand what is happening.
+    Feel free to delete them once you know what you're doing, but they should serve as a guide
+    for when you are first encountering a few different constructs in your Neovim config.
+
+If you experience any errors while trying to install kickstart, run `:checkhealth` for more info.
+
+I hope you enjoy your Neovim journey,
+- TJ
+
+P.S. You can delete this when you're done too. It's your config now! :)
+--]]
+
 -- ============================================================
--- SECTION 1: FOUNDATION
--- Core Neovim settings, leaders, options, basic keymaps, basic autocmds
+-- SECTION 1: OPTIONS
+-- Core Neovim settings, leaders, options
 -- ============================================================
 do
 	-- Enable faster startup by caching compiled Lua modules
@@ -10,6 +96,8 @@ do
 	vim.o.tabstop = 2
 	vim.o.shiftwidth = 2
 	vim.o.softtabstop = 2
+	vim.o.autoindent = true
+	vim.o.smartindent = true
 
 	-- Set <space> as the leader key
 	-- See `:help mapleader`
@@ -41,7 +129,9 @@ do
 	--  Schedule the setting after `UiEnter` because it can increase startup-time.
 	--  Remove this option if you want your OS clipboard to remain independent.
 	--  See `:help 'clipboard'`
-	-- vim.schedule(function() vim.o.clipboard = 'unnamedplus' end)
+	vim.schedule(function()
+		vim.o.clipboard = "unnamedplus"
+	end)
 
 	-- Enable break indent
 	vim.o.breakindent = true
@@ -90,7 +180,13 @@ do
 	-- instead raise a dialog asking if you wish to save the current file(s)
 	-- See `:help 'confirm'`
 	vim.o.confirm = true
+end
 
+-- ============================================================
+-- SECTION 2: KEYMAPS & AUTOCMDS
+-- basic keymaps, basic autocmds
+-- ============================================================
+do
 	-- [[ Basic Keymaps ]]
 	--  See `:help vim.keymap.set()`
 
@@ -169,7 +265,7 @@ do
 end
 
 -- ============================================================
--- SECTION 2: PLUGIN MANAGER INTRO
+-- SECTION 3: PLUGIN MANAGER INTRO
 -- vim.pack intro, build hooks
 -- ============================================================
 do
@@ -242,8 +338,8 @@ do
 	})
 end
 
----Because most plugins are hosted on GitHub, you can use the helper
----function to have less repetition in the following sections.
+--- Because most plugins are hosted on GitHub, you can use the helper
+--- function to have less repetition in the following sections.
 ---@param repo string
 ---@return string
 local function gh(repo)
@@ -251,7 +347,7 @@ local function gh(repo)
 end
 
 -- ============================================================
--- SECTION 3: UI / CORE UX PLUGINS
+-- SECTION 4: UI / CORE UX PLUGINS
 -- guess-indent, gitsigns, which-key, colorscheme, todo-comments, mini modules
 -- ============================================================
 do
@@ -271,6 +367,25 @@ do
 	vim.pack.add({ gh("NMAC427/guess-indent.nvim") })
 	require("guess-indent").setup({})
 
+	vim.pack.add({ gh("tpope/vim-endwise") })
+
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = "luau",
+		group = vim.api.nvim_create_augroup("endwise-luau", { clear = true }),
+		callback = function()
+			-- endwise checks classic :syntax groups (e.g. luaFunction) to
+			-- avoid inserting 'end' inside strings/comments. Treesitter-only
+			-- highlighting doesn't populate those groups, so also load Lua's
+			-- legacy syntax file for this buffer (harmless alongside treesitter).
+			vim.bo.syntax = "lua"
+
+			vim.b.endwise_addition = "end"
+			vim.b.endwise_words = "function,do,then"
+			vim.b.endwise_pattern = [[^\s*\zs\%(\%(local\s\+\)\=function\)\>\%(.*\<end\>\)\@!\|\<\%(then\|do\)\ze\s*$]]
+			vim.b.endwise_syngroups = "luaFunction,luaStatement,luaCond,luaLocal,luaFuncKeyword,luaRepeat"
+		end,
+	})
+
 	-- Because lua is a real programming language, you can also have some logic to your installation -
 	-- like only installing a plugin if a condition is met.
 	--
@@ -285,7 +400,8 @@ do
 	-- See `:help gitsigns` to understand what each configuration key does.
 	-- Adds git related signs to the gutter, as well as utilities for managing changes
 	vim.pack.add({ gh("lewis6991/gitsigns.nvim") })
-	require("gitsigns").setup({
+	local gitsigns = require("gitsigns")
+	gitsigns.setup({
 		signs = {
 			add = { text = "+" }, ---@diagnostic disable-line: missing-fields
 			change = { text = "~" }, ---@diagnostic disable-line: missing-fields
@@ -293,6 +409,81 @@ do
 			topdelete = { text = "‾" }, ---@diagnostic disable-line: missing-fields
 			changedelete = { text = "~" }, ---@diagnostic disable-line: missing-fields
 		},
+		-- gitsigns.nvim's recommended keymaps:
+		on_attach = function(bufnr)
+			-- Navigation
+			vim.keymap.set("n", "]c", function()
+				if vim.wo.diff then
+					vim.cmd.normal({ "]c", bang = true })
+				else
+					gitsigns.nav_hunk("next")
+				end
+			end, { desc = "Jump to next git [c]hange", buf = bufnr })
+
+			vim.keymap.set("n", "[c", function()
+				if vim.wo.diff then
+					vim.cmd.normal({ "[c", bang = true })
+				else
+					gitsigns.nav_hunk("prev")
+				end
+			end, { desc = "Jump to previous git [c]hange", buf = bufnr })
+
+			-- Visual mode actions
+			vim.keymap.set("v", "<leader>hs", function()
+				gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+			end, { desc = "git [s]tage hunk", buf = bufnr })
+			vim.keymap.set("v", "<leader>hr", function()
+				gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+			end, { desc = "git [r]eset hunk", buf = bufnr })
+			-- Normal mode actions
+			vim.keymap.set("n", "<leader>hs", gitsigns.stage_hunk, { desc = "git [s]tage hunk", buf = bufnr })
+			vim.keymap.set("n", "<leader>hr", gitsigns.reset_hunk, { desc = "git [r]eset hunk", buf = bufnr })
+			vim.keymap.set("n", "<leader>hS", gitsigns.stage_buffer, { desc = "git [S]tage buffer", buf = bufnr })
+			vim.keymap.set("n", "<leader>hR", gitsigns.reset_buffer, { desc = "git [R]eset buffer", buf = bufnr })
+			vim.keymap.set("n", "<leader>hp", gitsigns.preview_hunk, { desc = "git [p]review hunk", buf = bufnr })
+			vim.keymap.set(
+				"n",
+				"<leader>hi",
+				gitsigns.preview_hunk_inline,
+				{ desc = "git preview hunk [i]nline", buf = bufnr }
+			)
+			vim.keymap.set("n", "<leader>hb", function()
+				gitsigns.blame_line({ full = true })
+			end, { desc = "git [b]lame line", buf = bufnr })
+			vim.keymap.set("n", "<leader>hd", gitsigns.diffthis, { desc = "git [d]iff against index", buf = bufnr })
+			vim.keymap.set("n", "<leader>hD", function()
+				gitsigns.diffthis("~")
+			end, { desc = "git [D]iff against last commit", buf = bufnr })
+			vim.keymap.set("n", "<leader>hQ", function()
+				gitsigns.setqflist("all")
+			end, { desc = "git hunk [Q]uickfix list (all files in repo)", buf = bufnr })
+			vim.keymap.set(
+				"n",
+				"<leader>hq",
+				gitsigns.setqflist,
+				{ desc = "git hunk [q]uickfix list (all changes in this file)", buf = bufnr }
+			)
+			-- Toggles
+			vim.keymap.set(
+				"n",
+				"<leader>tb",
+				gitsigns.toggle_current_line_blame,
+				{ desc = "[T]oggle git show [b]lame line", buf = bufnr }
+			)
+			vim.keymap.set(
+				"n",
+				"<leader>tw",
+				gitsigns.toggle_word_diff,
+				{ desc = "[T]oggle git intra-line [w]ord diff", buf = bufnr }
+			)
+			-- Text object
+			vim.keymap.set(
+				{ "o", "x" },
+				"ih",
+				gitsigns.select_hunk,
+				{ desc = "text object [i]nside [h]unk", buf = bufnr }
+			)
+		end,
 	})
 
 	-- Useful plugin to show you pending keybinds.
@@ -319,8 +510,11 @@ do
 	vim.pack.add({ gh("folke/tokyonight.nvim") })
 	---@diagnostic disable-next-line: missing-fields
 	require("tokyonight").setup({
+		transparent = true,
 		styles = {
-			comments = { italic = false }, -- Disable italics in comments
+			sidebars = "transparent",
+			floats = "transparent",
+			comments = { italic = true }, -- Disable italics in comments
 		},
 	})
 
@@ -337,7 +531,12 @@ do
 	--  A collection of various small independent plugins/modules
 	vim.pack.add({ gh("nvim-mini/mini.nvim") })
 
-	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+	-- If a nerd font is available, load the icons module for pretty icons in various plugins.
+	if vim.g.have_nerd_font then
+		require("mini.icons").setup()
+		-- Used for backwards compatibility with plugins that require `nvim-web-devicons` (e.g. telescope.nvim)
+		MiniIcons.mock_nvim_web_devicons()
+	end
 
 	-- Better Around/Inside textobjects
 	--
@@ -381,7 +580,7 @@ do
 end
 
 -- ============================================================
--- SECTION 4: SEARCH & NAVIGATION
+-- SECTION 5: SEARCH & NAVIGATION
 -- Telescope setup, keymaps, LSP picker mappings
 -- ============================================================
 do
@@ -409,7 +608,7 @@ do
 	-- Telescope picker. This is really useful to discover what Telescope can
 	-- do as well as how to actually do it!
 
-	---@type (string|vim.pack.Spec)[]
+	---@type (string | vim.pack.Spec)[]
 	local telescope_plugins = {
 		gh("nvim-lua/plenary.nvim"),
 		gh("nvim-telescope/telescope.nvim"),
@@ -520,12 +719,12 @@ do
 
 	-- Shortcut for searching your Neovim configuration files
 	vim.keymap.set("n", "<leader>sn", function()
-		builtin.find_files({ cwd = vim.fn.stdpath("config") })
+		builtin.find_files({ cwd = vim.fn.stdpath("config"), follow = true })
 	end, { desc = "[S]earch [N]eovim files" })
 end
 
 -- ============================================================
--- SECTION 5: LSP
+-- SECTION 6: LSP
 -- LSP keymaps, server configuration, Mason tools installations
 -- ============================================================
 do
@@ -642,16 +841,16 @@ do
 				"lsp",
 				"--definitions:@noctalia=" .. vim.fn.expand("~/noctalia/plugins/noctalia.d.luau"),
 			},
-			init_options = {
-				["luau-lsp"] = {
-					require = {
-						mode = "relativeToFile",
-						directoryAliases = {
-							["@lune/"] = vim.fn.expand("~/.lune/.typedefs/x.y.z/"),
-						},
-					},
-				},
-			},
+			-- init_options = {
+			-- 	["luau-lsp"] = {
+			-- 		require = {
+			-- 			mode = "relativeToFile",
+			-- 			directoryAliases = {
+			-- 				["@lune/"] = vim.fn.expand("~/.lune/.typedefs/x.y.z/"),
+			-- 			},
+			-- 		},
+			-- 	},
+			-- },
 		},
 		-- pyright = {},
 		-- rust_analyzer = {},
@@ -662,7 +861,8 @@ do
 		-- But for many setups, the LSP (`ts_ls`) will work just fine
 		-- ts_ls = {},
 
-		stylua = {},
+		stylua = {}, -- Used to format Lua code
+
 		-- Special Lua Config, as recommended by neovim help docs
 		lua_ls = {
 			on_init = function(client)
@@ -678,7 +878,8 @@ do
 					end
 				end
 
-				client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+				local current_settings = client.config.settings --[[@as lspconfig.settings.lua_ls]]
+				client.config.settings.Lua = vim.tbl_deep_extend("force", current_settings.Lua, {
 					runtime = {
 						version = "LuaJIT",
 						path = { "lua/?.lua", "lua/?/init.lua" },
@@ -687,10 +888,7 @@ do
 						checkThirdParty = false,
 						-- NOTE: this is a lot slower and will cause issues when working on your own configuration.
 						--  See https://github.com/neovim/nvim-lspconfig/issues/3189
-						library = vim.tbl_extend("force", vim.api.nvim_get_runtime_file("", true), {
-							"${3rd}/luv/library",
-							"${3rd}/busted/library",
-						}),
+						library = vim.api.nvim_get_runtime_file("", true),
 					},
 				})
 			end,
@@ -713,6 +911,11 @@ do
 	-- Automatically install LSPs and related tools to stdpath for Neovim
 	require("mason").setup({})
 
+	-- Translates between nvim-lspconfig server names and mason.nvim package names (e.g. lua_ls <-> lua-language-server)
+	require("mason-lspconfig").setup({
+		automatic_enable = false, -- Change this to true if you want to automatically enable servers that are installed manually (e.g. via :Mason / :MasonInstall)
+	})
+
 	-- Ensure the servers and tools above are installed
 	--
 	-- To check the current status of installed tools and/or manually install
@@ -734,7 +937,7 @@ do
 end
 
 -- ============================================================
--- SECTION 6: FORMATTING
+-- SECTION 7: FORMATTING
 -- conform.nvim setup and keymap
 -- ============================================================
 do
@@ -777,7 +980,7 @@ do
 end
 
 -- ============================================================
--- SECTION 7: AUTOCOMPLETE & SNIPPETS
+-- SECTION 8: AUTOCOMPLETE & SNIPPETS
 -- blink.cmp and luasnip setup
 -- ============================================================
 do
@@ -859,7 +1062,7 @@ do
 end
 
 -- ============================================================
--- SECTION 8: TREESITTER
+-- SECTION 9: TREESITTER
 -- Parser installation, syntax highlighting, folds, indentation
 -- ============================================================
 do
@@ -883,6 +1086,12 @@ do
 		if not vim.treesitter.language.add(language) then
 			return
 		end
+
+		-- Check if the buffer is valid (might not be after install completes)
+		if not vim.api.nvim_buf_is_valid(buf) then
+			return
+		end
+
 		-- Enable syntax highlighting and other treesitter features
 		vim.treesitter.start(buf, language)
 
@@ -930,7 +1139,7 @@ do
 end
 
 -- ============================================================
--- SECTION 9: OPTIONAL EXAMPLES / NEXT STEPS
+-- SECTION 10: OPTIONAL EXAMPLES / NEXT STEPS
 -- kickstart.plugins.* examples
 -- ============================================================
 do
@@ -946,14 +1155,22 @@ do
 	-- require 'kickstart.plugins.debug'
 	-- require 'kickstart.plugins.indent_line'
 	-- require 'kickstart.plugins.lint'
-	-- require 'kickstart.plugins.autopairs'
+	require("kickstart.plugins.autopairs")
 	-- require 'kickstart.plugins.neo-tree'
-	-- require 'kickstart.plugins.gitsigns' -- adds gitsigns recommended keymaps
 
-	-- NOTE: You can add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
+	-- NOTE: You can add your own plugins, configuration, etc. in `lua/custom/plugins/*.lua`.
 	--
-	--  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
+	-- For independent modules, uncomment the convenience loader:
 	-- require 'custom.plugins'
+	--
+	-- `custom.plugins` automatically loads files from that directory, but their
+	-- order is unspecified. If plugins depend on each other, keep them in the same
+	-- file and put their `vim.pack.add()` and `setup()` calls in the required order.
+	--
+	-- If separate modules need a specific order, require them explicitly instead:
+	-- require 'custom.plugins.colorscheme'
+	-- require 'custom.plugins.ui'
+	-- require 'custom.plugins.git'
 end
 
 -- The line beneath this is called `modeline`. See `:help modeline`
